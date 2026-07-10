@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FIFA 2026 World Cup Predictor</title>
+<style>
+:root{--ink:#eef6ff;--muted:#9bb0c9;--line:#fff;--ok:#20d67b;--bad:#ff4d5e;--accent:#58a6ff;--user-color:#32d583;--gold:#ffd166;--silver:#cfd8e3;--bronze:#d99a5b}*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at top,#12365c,#07111f 58%);color:var(--ink)}header{padding:10px 14px;border-bottom:1px solid #24415f;background:rgba(5,14,26,.88);position:sticky;top:0;z-index:20;backdrop-filter:blur(8px)}.header-grid{display:grid;grid-template-columns:1fr 420px;row-gap:8px;column-gap:18px;align-items:center}.title{font-size:24px;font-weight:900}.desc{color:#aebfd5;font-size:14px;font-weight:700}.ctrl-row{display:grid;grid-template-columns:22px 260px 128px;gap:8px;align-items:center;justify-content:end}.swatch{width:18px;height:18px;border-radius:999px;border:2px solid #fff;box-shadow:0 0 10px var(--user-color);display:inline-block}select,input{height:40px;background:#0b1a2e;border:1px solid #315170;color:#eef6ff;border-radius:11px;padding:0 12px;font-size:15px;width:260px}button{height:40px;border:0;border-radius:12px;padding:0 16px;font-size:13px;font-weight:800;cursor:pointer;width:128px}.btn.create{background:var(--accent);color:#06111f}.btn.reset{background:#ff6573;color:#19050a}main{padding:16px;overflow:auto}.section{max-width:1480px;margin:0 auto 16px}.section-title{font-size:18px;margin:0 0 10px;color:#fff}.status-card{background:rgba(16,34,58,.82);border:1px solid #2b4c70;border-radius:14px;padding:10px 14px;color:#cfe4fb;font-size:13px;margin-bottom:10px}.status-card b{color:#fff}.status-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:var(--user-color);box-shadow:0 0 12px var(--user-color)}.bracket-wrap{width:max-content;margin:auto}.bracket{position:relative;width:1480px;height:900px;background:rgba(8,21,38,.68);border:1px solid #25445f;border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.35);overflow:hidden}.sep{position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(transparent,#6f8ead,transparent);opacity:.35}.round-label{position:absolute;top:42px;transform:translateX(-50%);color:#a8c7ea;font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}.team,.drop-slot{position:absolute;width:124px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;user-select:none;transition:.15s ease;border:2px solid transparent;font-weight:950;box-shadow:0 8px 20px rgba(0,0,0,.22);z-index:2}.team{background:linear-gradient(180deg,#112844,#0a1a2b);border-color:#31587a;cursor:grab}.team:active,.drop-slot.filled:active{cursor:grabbing}.abbr{font-size:18px;letter-spacing:.14em;color:#fff;font-weight:950}.team:hover::after,.drop-slot.filled:hover::after{content:attr(data-name);position:absolute;left:50%;top:-32px;transform:translateX(-50%);background:#000;color:#fff;border:1px solid #4e6b8c;padding:5px 8px;border-radius:8px;white-space:nowrap;font-size:12px;z-index:30}.team.selected,.drop-slot.selected{outline:3px solid var(--user-color);box-shadow:0 0 0 5px color-mix(in srgb,var(--user-color) 26%,transparent),0 8px 20px rgba(0,0,0,.22)}.drop-slot{background:rgba(19,42,72,.86);border:2px dashed #557799;color:#b8ccdf;text-align:center}.drop-slot.filled{border-style:solid;background:linear-gradient(180deg,#143456,#0b2038);cursor:grab}.drop-slot.eligible{border-color:var(--ok);box-shadow:0 0 0 4px rgba(32,214,123,.18)}.drop-slot.ineligible{border-color:var(--bad);box-shadow:0 0 0 4px rgba(255,77,94,.18)}.slot-text{font-size:11px;font-weight:900;letter-spacing:.06em}.tiny{display:block;font-size:9px;color:#a7bad0;font-weight:700;margin-top:1px}.drop-slot.finalmatch{width:142px;height:48px;border-color:var(--silver);background:radial-gradient(circle at top,#4a5568,#132a48 72%);box-shadow:0 0 16px rgba(207,216,227,.22),0 8px 20px rgba(0,0,0,.22)}.drop-slot.finalmatch .slot-text{color:var(--silver);font-size:13px;text-shadow:0 0 10px rgba(207,216,227,.45)}.drop-slot.champion{width:190px;height:68px;border-width:3px;background:radial-gradient(circle at top,#5b3d05,#19324f 68%);border-color:var(--gold);box-shadow:0 0 28px rgba(255,209,102,.34),0 10px 28px rgba(0,0,0,.30)}.drop-slot.champion .slot-text{font-size:22px;color:var(--gold);text-shadow:0 0 14px rgba(255,209,102,.55);letter-spacing:.10em}.drop-slot.champion.filled .abbr{font-size:26px;color:var(--gold);text-shadow:0 0 14px rgba(255,209,102,.55)}.drop-slot.third{width:170px;height:48px;border-color:var(--bronze);background:radial-gradient(circle at top,#51300e,#132a48 70%);box-shadow:0 0 20px rgba(217,154,91,.24),0 8px 20px rgba(0,0,0,.22)}.drop-slot.third .slot-text{color:var(--bronze);font-size:13px;text-shadow:0 0 11px rgba(217,154,91,.48)}.connector{position:absolute;background:var(--line);opacity:.80;border-radius:2px;z-index:0;pointer-events:none}.connector.path{background:var(--user-color);opacity:1;box-shadow:0 0 12px var(--user-color)}section.users{max-width:1480px;margin:18px auto 45px;background:rgba(8,21,38,.75);border:1px solid #25445f;border-radius:16px;padding:14px}section.users h2{margin:0 0 10px;font-size:18px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:780px}th,td{padding:9px 12px;border-bottom:1px solid #233d5c;text-align:left;font-size:13px}th{color:#bcd0e7;background:#10223a}tr.matrix-row{cursor:pointer}tr.matrix-row:hover{filter:brightness(1.12)}.mono{font-family:Consolas,monospace}.small{font-size:12px;color:#d8e8fa}.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:100}.modal.show{display:flex}.modal-card{width:min(920px,92vw);background:#07111f;border:1px solid #436487;border-radius:18px;padding:18px}.modal-head{display:flex;justify-content:space-between;align-items:center}.close{background:#1d344e;color:#fff;border:1px solid #4f7195}.stage{height:360px;background:#0b1b31;border:1px solid #2b4b69;border-radius:14px;margin-top:14px;display:flex;align-items:center;justify-content:center}.stage-card{width:240px;height:100px;border-radius:16px;background:#102d4d;border:3px solid var(--user-color);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 34px color-mix(in srgb,var(--user-color) 42%,transparent);animation:pop .5s ease both}.progress{height:10px;background:#152b46;border-radius:999px;overflow:hidden;margin-top:14px}.bar{height:100%;width:0;background:var(--user-color);transition:width .25s linear}@keyframes pop{from{transform:scale(.72);opacity:0}to{transform:scale(1);opacity:1}}@media(max-width:900px){.header-grid{grid-template-columns:1fr}.ctrl-row{justify-content:flex-start;grid-template-columns:22px minmax(180px,260px) 128px}select,input{width:100%;min-width:0}.bracket{transform-origin:top left}}
+.welcome-banner{position:relative;max-width:1480px;margin:12px auto 18px auto;padding:16px 20px;border-radius:14px;border:1px solid #3c6a94;background:linear-gradient(135deg,rgba(24,48,78,.95),rgba(11,28,48,.95));color:#eef6ff;line-height:1.6}.welcome-banner p{margin:8px 0}.welcome-title{font-size:20px;font-weight:900;margin-bottom:10px}.welcome-footer{margin-top:10px;font-size:15px}.welcome-close{position:absolute;top:10px;right:12px;border:none;background:transparent;color:#cfe4fb;font-size:18px;cursor:pointer;width:auto;height:auto;padding:2px 6px}.welcome-close:hover{color:#fff;background:rgba(255,255,255,.08)}.sync-badge{max-width:1480px;margin:0 auto 8px auto;color:#9bb0c9;font-size:12px}.sync-badge b{color:#eef6ff}</style>
+</head>
+<body>
+<header>
+  <div class="header-grid">
+    <div class="title">🏆 FIFA 2026 World Cup Predictor</div>
+    <div class="ctrl-row"><span class="swatch" id="activeColor"></span><select id="activeUserSelect"></select><button class="btn reset" id="resetActive">Clear Selections</button></div>
+    <div class="desc">Round 32 Bracket Predictor</div>
+    <div class="ctrl-row"><span></span><input id="newUserName" placeholder="Enter User Name" /><button class="btn create" id="createUser">Create User</button></div>
+  </div>
+</header>
+<div id="welcomeBanner" class="welcome-banner">
+  <button class="welcome-close" id="closeWelcome" aria-label="Dismiss welcome message">✕</button>
+  <div class="welcome-title">⚽ Welcome to the FIFA 2026 World Cup Predictor!</div>
+  <p>Think you can predict the road to glory? Start with the Round of 32 and build your path all the way to the World Champion! Use the Default User or create your own profile to compete with friends, family, and fellow football fans. Each user receives a unique color, and every correct prediction lights up their personal Road to Victory across the tournament bracket.</p>
+  <p>The FIFA 2026 profile is the official read-only tracker, automatically showing the actual match results and the real path to the World Cup as games are completed. Compare your predictions against reality and climb the leaderboard in the Prediction Matrix, where every user earns a score based on how closely their selections match the official results.</p>
+  <p class="welcome-footer">🏆 <strong>Predict boldly. Spot the upsets. Prove you're the ultimate World Cup expert!</strong></p>
+</div>
+
+<main>
+  <section class="section results-section">
+    <h2 class="section-title">Results Selection</h2>
+    <div class="status-card" id="statusCard"></div>
+    <div class="bracket-wrap"><div class="bracket" id="bracket"><div class="sep"></div></div></div>
+  </section>
+  <section class="users"><h2>Prediction Matrix</h2><div class="table-wrap"><table><thead><tr><th>User</th><th>Color</th><th>Champion</th><th>Completed Picks</th><th>Score vs FIFA 2026</th><th>Replay</th></tr></thead><tbody id="userRows"></tbody></table></div></section>
+</main>
+<div class="modal" id="replayModal"><div class="modal-card"><div class="modal-head"><h3 id="replayTitle">Replay</h3><button class="close" id="closeReplay">Close</button></div><div class="stage" id="stage"></div><div class="progress"><div class="bar" id="bar"></div></div></div></div>
+<script>
+const memoryStore={};
+function safeGet(key){try{return window.localStorage.getItem(key)}catch(e){return Object.prototype.hasOwnProperty.call(memoryStore,key)?memoryStore[key]:null}}
+function safeSet(key,value){try{window.localStorage.setItem(key,value)}catch(e){memoryStore[key]=String(value)}}
+
+const TOTAL_SLOTS=32;
+const ACTUAL_RESULTS_VERSION='2026-07-03T12:19:00+05:30';
+let ACTUAL_RESULTS={};
+let LAST_OFFICIAL_REFRESH='';
+const OFFICIAL_RESULTS_TIMELINE=[
+  {slot:'R16-left-0',winner:'CAN',availableAt:'2026-06-29T23:30:00+05:30',summary:'Canada advanced over South Africa'},
+  {slot:'R16-left-1',winner:'MAR',availableAt:'2026-06-30T09:45:00+05:30',summary:'Morocco advanced over Netherlands'},
+  {slot:'R16-left-2',winner:'PAR',availableAt:'2026-06-30T04:00:00+05:30',summary:'Paraguay advanced over Germany'},
+  {slot:'R16-left-3',winner:'FRA',availableAt:'2026-07-01T04:45:00+05:30',summary:'France advanced over Sweden'},
+  {slot:'R16-left-4',winner:'BRA',availableAt:'2026-06-29T23:30:00+05:30',summary:'Brazil advanced over Japan'},
+  {slot:'R16-left-5',winner:'NOR',availableAt:'2026-07-01T02:00:00+05:30',summary:'Norway advanced over Ivory Coast'},
+  {slot:'R16-left-6',winner:'MEX',availableAt:'2026-07-01T10:45:00+05:30',summary:'Mexico advanced over Ecuador'},
+  {slot:'R16-left-7',winner:'ENG',availableAt:'2026-07-02T00:15:00+05:30',summary:'England advanced over DR Congo'},
+  {slot:'R16-right-0',winner:'USA',availableAt:'2026-07-02T08:45:00+05:30',summary:'USA advanced over Bosnia and Herzegovina'},
+  {slot:'R16-right-1',winner:'BEL',availableAt:'2026-07-02T08:30:00+05:30',summary:'Belgium advanced over Senegal'},
+  {slot:'R16-right-2',winner:'POR',availableAt:'2026-07-03T06:50:00+05:30',summary:'Portugal advanced over Croatia'},
+  {slot:'R16-right-3',winner:'ESP',availableAt:'2026-07-03T02:44:00+05:30',summary:'Spain advanced over Austria'},
+  {slot:'R16-right-4',winner:'SUI',availableAt:'2026-07-03T10:40:00+05:30',summary:'Switzerland advanced over Algeria'},
+  {slot:'R16-right-5',winner:'COL',availableAt:'2026-07-03T10:40:00+05:30',summary:'Colombia advanced over Ghana'},
+  {slot:'R16-right-6',winner:'ARG',availableAt:'2026-07-03T10:40:00+05:30',summary:'Argentina advanced over Cape Verde'},
+  {slot:'R16-right-7',winner:'EGY',availableAt:'2026-07-03T10:40:00+05:30',summary:'Egypt advanced over Australia'},
+  {slot:'QF-left-0',winner:'MAR',availableAt:'2026-07-08T00:00:00+05:30',summary:'Morocco advanced over Canada'},
+  {slot:'QF-left-1',winner:'FRA',availableAt:'2026-07-08T00:00:00+05:30',summary:'France advanced over Paraguay'},
+  {slot:'QF-left-2',winner:'NOR',availableAt:'2026-07-08T00:00:00+05:30',summary:'Norway advanced over Brazil'},
+  {slot:'QF-left-3',winner:'ENG',availableAt:'2026-07-08T00:00:00+05:30',summary:'England advanced over Mexico'},
+  {slot:'QF-right-0',winner:'BEL',availableAt:'2026-07-08T00:00:00+05:30',summary:'Belgium advanced over USA'},
+  {slot:'QF-right-1',winner:'ESP',availableAt:'2026-07-08T00:00:00+05:30',summary:'Spain advanced over Portugal'},
+  {slot:'QF-right-2',winner:'SUI',availableAt:'2026-07-08T00:00:00+05:30',summary:'Switzerland advanced over Colombia'},
+  {slot:'QF-right-3',winner:'ARG',availableAt:'2026-07-08T00:00:00+05:30',summary:'Argentina advanced over Egypt'}
+];
+function computeOfficialResults(now=new Date()){
+  const results={};
+  OFFICIAL_RESULTS_TIMELINE.forEach(m=>{ if(now.getTime()>=new Date(m.availableAt).getTime())results[m.slot]=m.winner; });
+  return results;
+}
+function officialSummaryText(){
+  const completed=OFFICIAL_RESULTS_TIMELINE.filter(m=>ACTUAL_RESULTS[m.slot]).map(m=>`${m.winner} (${m.summary})`).join('; ');
+  return completed || 'No completed official results loaded yet';
+}
+const FIXTURES=[
+  {a:['RSA','South Africa'],b:['CAN','Canada']},
+  {a:['NED','Netherlands'],b:['MAR','Morocco']},
+  {a:['GER','Germany'],b:['PAR','Paraguay']},
+  {a:['FRA','France'],b:['SWE','Sweden']},
+  {a:['BRA','Brazil'],b:['JPN','Japan']},
+  {a:['CIV','Ivory Coast'],b:['NOR','Norway']},
+  {a:['MEX','Mexico'],b:['ECU','Ecuador']},
+  {a:['ENG','England'],b:['COD','DR Congo']},
+  {a:['USA','USA'],b:['BIH','Bosnia and Herzegovina']},
+  {a:['BEL','Belgium'],b:['SEN','Senegal']},
+  {a:['POR','Portugal'],b:['CRO','Croatia']},
+  {a:['ESP','Spain'],b:['AUT','Austria']},
+  {a:['SUI','Switzerland'],b:['ALG','Algeria']},
+  {a:['COL','Colombia'],b:['GHA','Ghana']},
+  {a:['ARG','Argentina'],b:['CPV','Cape Verde']},
+  {a:['AUS','Australia'],b:['EGY','Egypt']}
+];
+const TEAMS=FIXTURES.flatMap(f=>[f.a,f.b]),teamMap=Object.fromEntries(TEAMS.map(t=>[t[0],{abbr:t[0],name:t[1]}]));
+const COLORS=['#32d583','#58a6ff','#f79009','#f97066','#b692f6','#06aed4','#fdb022','#12b76a','#ee46bc','#84caff','#a6ef67'],DEFAULT_COLOR='#32d583',FIFA_COLOR='#00e5ff',bracket=document.getElementById('bracket'),storeKey='fifa2026Predictor.officialR32.v24.r32-natural-order';
+function defaultState(){return{active:'Default User',actualResultsVersion:'',users:{'Default User':{color:DEFAULT_COLOR,picks:{}},'FIFA 2026':{color:FIFA_COLOR,picks:{}}}}}
+function normalizeState(s){if(!s||!s.users)return defaultState();if(!s.users['Default User'])s.users['Default User']={color:DEFAULT_COLOR,picks:{}};if(!s.users['FIFA 2026'])s.users['FIFA 2026']={color:FIFA_COLOR,picks:{}};s.users['Default User'].color=DEFAULT_COLOR;s.users['FIFA 2026'].color=FIFA_COLOR;Object.values(s.users).forEach(u=>{if(!u.picks)u.picks={}});if(!s.active||!s.users[s.active])s.active='Default User';if(!s.actualResultsVersion)s.actualResultsVersion='';return s}
+function loadState(){try{return normalizeState(JSON.parse(safeGet(storeKey))||defaultState())}catch{return defaultState()}}
+let state=loadState(),active='Default User';state.active='Default User';
+function applyActualResults(){ACTUAL_RESULTS=computeOfficialResults(new Date());LAST_OFFICIAL_REFRESH=new Date().toLocaleString();const fifa=state.users['FIFA 2026'];fifa.picks={};Object.entries(ACTUAL_RESULTS).forEach(([slot,team])=>{fifa.picks[slot]=team});state.actualResultsVersion=ACTUAL_RESULTS_VERSION;state.lastOfficialRefresh=LAST_OFFICIAL_REFRESH}
+applyActualResults();
+
+function refreshOfficialResults(forceRender=false){
+  applyActualResults();
+  safeSet(storeKey,JSON.stringify(state));
+  if(forceRender){
+    renderBracket();
+    renderUsers();
+    renderStatus();
+    scaleBracket();
+  }
+}
+
+function save(){applyActualResults();state.active=active;safeSet(storeKey,JSON.stringify(state));renderUserControls();renderUsers();renderStatus();try{if(active!=='FIFA 2026'&&typeof cloudSavePrediction==='function')cloudSavePrediction(active)}catch(e){console.warn(e)}}function colorFor(){return COLORS[Object.keys(state.users).length%COLORS.length]}
+const W=124,H=38,FW=142,FH=48,CW=190,CH=68,TW=170,TH=48;
+const layout={left:{x:[34,214,374,510],ys0:[80,130,180,230,280,330,380,430,480,530,580,630,680,730,780,830]},right:{x:[1322,1142,982,846],ys0:[80,130,180,230,280,330,380,430,480,530,580,630,680,730,780,830]}},columnLabels=[['ROUND OF 32',96],['ROUND OF 16',276],['QUARTERS',436],['SEMIS',572],['FINAL',740],['SEMIS',908],['QUARTERS',1044],['ROUND OF 16',1204],['ROUND OF 32',1384]],nodes={},basePositions={};
+function slotId(r,s,i){return`${r}-${s}-${i}`}function yMid(a){return(a[0]+a[a.length-1])/2}
+function buildModel(){['left','right'].forEach((side,sideIndex)=>{let fixtures=FIXTURES.slice(sideIndex*8,sideIndex*8+8),sideTeams=fixtures.flatMap(f=>[f.a,f.b]);for(let i=0;i<16;i++){let t=sideTeams[i],id=`team-${t[0]}`;nodes[id]={id,type:'team',side,round:'R32',teams:[t[0]],x:layout[side].x[0],y:layout[side].ys0[i]};basePositions[t[0]]={x:layout[side].x[0],y:layout[side].ys0[i],side}}let prev=sideTeams.map(t=>`team-${t[0]}`);[['R16',8],['QF',4],['SF',2]].forEach(([round,count],ri)=>{let next=[];for(let i=0;i<count;i++){let kids=[prev[i*2],prev[i*2+1]],teams=[...nodes[kids[0]].teams,...nodes[kids[1]].teams],ys=kids.flatMap(k=>nodes[k].teams.map(t=>basePositions[t].y)),id=slotId(round,side,i);nodes[id]={id,type:'slot',side,round,idx:i,kids,teams,x:layout[side].x[ri+1],y:yMid(ys)};next.push(id)}prev=next})});nodes.FINAL1={id:'FINAL1',type:'slot',side:'center',round:'FINAL 1',kids:['SF-left-0','SF-left-1'],teams:[...nodes['SF-left-0'].teams,...nodes['SF-left-1'].teams],x:570,y:420};nodes.FINAL2={id:'FINAL2',type:'slot',side:'center',round:'FINAL 2',kids:['SF-right-0','SF-right-1'],teams:[...nodes['SF-right-0'].teams,...nodes['SF-right-1'].teams],x:768,y:420};nodes.CHAMPION={id:'CHAMPION',type:'slot',side:'center',round:'CHAMPION',kids:['FINAL1','FINAL2'],teams:TEAMS.map(t=>t[0]),x:645,y:275};nodes.THIRD={id:'THIRD',type:'slot',side:'center',round:'THIRD PLACE',kids:['SF-left-0','SF-left-1','SF-right-0','SF-right-1'],teams:TEAMS.map(t=>t[0]),x:655,y:560}}
+buildModel();
+function chipHTML(abbr){return`<span class="abbr">${abbr}</span>`}function sourceTeam(sourceId,picks){let n=nodes[sourceId];if(!n)return null;if(n.type==='team')return n.teams[0];return picks[sourceId]||null}function thirdCandidate(team,fromId,picks){if(!picks.FINAL1||!picks.FINAL2)return false;let st=sourceTeam(fromId,picks);if(st!==team)return false;if(nodes.FINAL1.kids.includes(fromId))return team!==picks.FINAL1;if(nodes.FINAL2.kids.includes(fromId))return team!==picks.FINAL2;return false}function thirdCanRemain(team,picks){return nodes.THIRD.kids.some(k=>thirdCandidate(team,k,picks))}function canDrop(team,slotId,fromId){let slot=nodes[slotId],picks=state.users[active].picks;if(!slot||slot.type!=='slot'||!slot.teams.includes(team))return false;if(slotId==='THIRD')return thirdCandidate(team,fromId,picks);return slot.kids.includes(fromId)&&sourceTeam(fromId,picks)===team}function pickCanRemain(slotId,team,picks){let slot=nodes[slotId];if(!slot)return false;if(slotId==='THIRD')return thirdCanRemain(team,picks);return slot.kids.some(k=>sourceTeam(k,picks)===team)}function cleanInvalid(picks){let changed=true;while(changed){changed=false;Object.keys(picks).forEach(slotId=>{if(slotId in ACTUAL_RESULTS && active==='FIFA 2026')return;if(!pickCanRemain(slotId,picks[slotId],picks)){delete picks[slotId];changed=true}})}}
+
+function canReverseDrop(team,targetId,fromId){
+  let sourceNode=nodes[fromId], targetNode=nodes[targetId], picks=state.users[active].picks;
+  if(!sourceNode||!targetNode||sourceNode.type!=='slot'||targetNode.type!=='slot')return false;
+  if(!picks[fromId]||picks[fromId]!==team)return false;
+  return (sourceNode.kids||[]).includes(targetId)&&sourceTeam(targetId,picks)===team;
+}
+function reverseSelection(fromId){
+  if(active==='FIFA 2026'){
+    officialUserWarning();
+    applyActualResults();
+    renderBracket();
+    return;
+  }
+  let picks=state.users[active].picks;
+  if(!fromId||!picks[fromId])return;
+  delete picks[fromId];
+  cleanInvalid(picks);
+  save();
+  renderBracket();
+}
+function nodeW(n){return n.id==='CHAMPION'?CW:n.id==='THIRD'?TW:(n.id==='FINAL1'||n.id==='FINAL2')?FW:W}function nodeH(n){return n.id==='CHAMPION'?CH:n.id==='THIRD'?TH:(n.id==='FINAL1'||n.id==='FINAL2')?FH:H}function addLine(x1,y1,x2,y2,to,from){let h=document.createElement('div');h.className='connector';h.style.left=Math.min(x1,x2)+'px';h.style.top=y1+'px';h.style.width=Math.abs(x2-x1)+'px';h.style.height='4px';h.dataset.to=to;h.dataset.from=from;bracket.appendChild(h);if(Math.abs(y2-y1)>1){let v=document.createElement('div');v.className='connector';v.style.left=x2+'px';v.style.top=Math.min(y1,y2)+'px';v.style.width='4px';v.style.height=Math.abs(y2-y1)+'px';v.dataset.to=to;v.dataset.from=from;bracket.appendChild(v)}}function connect(c,n){let cw=nodeW(c),nw=nodeW(n),ch=nodeH(c),nh=nodeH(n),y1=c.y+ch/2,y2=n.y+nh/2,x1,x2;if(c.x<n.x){x1=c.x+cw;x2=n.x}else{x1=c.x;x2=n.x+nw}addLine(x1,y1,x2,y2,n.id,c.id)}function drawConnectors(){document.querySelectorAll('.connector,.round-label').forEach(e=>e.remove());columnLabels.forEach(([txt,cx])=>{let d=document.createElement('div');d.className='round-label';d.textContent=txt;d.style.left=cx+'px';bracket.appendChild(d)});Object.values(nodes).filter(n=>n.type==='slot').forEach(n=>(n.kids||[]).forEach(k=>connect(nodes[k],n)))}
+function renderBracket(){document.querySelectorAll('.team,.drop-slot').forEach(e=>e.remove());applyActualResults();drawConnectors();let picks=state.users[active].picks;Object.values(nodes).forEach(n=>n.type==='team'?renderTeam(n):renderSlot(n,picks[n.id]));markPath(active);renderUserControls();renderStatus();scaleBracket()}
+function renderTeam(n){let abbr=n.teams[0],el=document.createElement('div');el.className='team '+n.side;el.id=n.id;el.draggable=true;el.dataset.team=abbr;el.dataset.source=n.id;el.dataset.name=teamMap[abbr].name;el.style.left=n.x+'px';el.style.top=n.y+'px';el.innerHTML=chipHTML(abbr);el.addEventListener('dragstart',dragStart);el.addEventListener('dragover',allowOrigin);el.addEventListener('drop',dropBack);bracket.appendChild(el)}
+function renderSlot(n,pick){let el=document.createElement('div'),extra=n.id==='CHAMPION'?'champion':n.id==='THIRD'?'third':(n.id==='FINAL1'||n.id==='FINAL2')?'finalmatch':'';el.className='drop-slot '+extra+' '+(pick?'filled ':'');el.id=n.id;el.dataset.slot=n.id;el.style.left=n.x+'px';el.style.top=n.y+'px';if(pick){el.innerHTML=chipHTML(pick);el.dataset.team=pick;el.dataset.source=n.id;el.dataset.name=teamMap[pick].name;el.draggable=true;el.title='Drag this team back to the previous/source slot to undo';el.addEventListener('dragstart',dragStart)}else{el.innerHTML=n.id==='CHAMPION'?`<span class="slot-text">CHAMPION</span>`:`<span><span class="slot-text">${n.round}</span><span class="tiny">drop winner</span></span>`;el.dataset.name=n.round}el.addEventListener('dragover',dragOverSlot);el.addEventListener('dragleave',e=>e.currentTarget.classList.remove('eligible','ineligible'));el.addEventListener('drop',dropOnSlot);bracket.appendChild(el)}
+function dragStart(e){e.dataTransfer.setData('text/plain',JSON.stringify({team:e.currentTarget.dataset.team,from:e.currentTarget.dataset.source||e.currentTarget.id}));window.dragData={team:e.currentTarget.dataset.team,from:e.currentTarget.dataset.source||e.currentTarget.id}}function safeData(e){try{return JSON.parse(e.dataTransfer.getData('text/plain'))||window.dragData}catch{return window.dragData}}document.addEventListener('dragend',()=>window.dragData=null);function officialUserWarning(){alert('This user shows the official FIFA 2026 match results. To predict, select a different user.')}function dragOverSlot(e){e.preventDefault();let d=safeData(e);e.currentTarget.classList.remove('eligible','ineligible');if(d){let ok=canDrop(d.team,e.currentTarget.id,d.from)||canReverseDrop(d.team,e.currentTarget.id,d.from);e.currentTarget.classList.add(ok?'eligible':'ineligible')}}function dropOnSlot(e){e.preventDefault();if(active==='FIFA 2026'){officialUserWarning();applyActualResults();renderBracket();return}let d=safeData(e),slotId=e.currentTarget.id;e.currentTarget.classList.remove('eligible','ineligible');if(!d)return;if(canReverseDrop(d.team,slotId,d.from)){reverseSelection(d.from);return}if(!canDrop(d.team,slotId,d.from))return;let picks=state.users[active].picks;picks[slotId]=d.team;cleanInvalid(picks);save();renderBracket()}function allowOrigin(e){let d=safeData(e);if(d&&e.currentTarget.dataset.team===d.team)e.preventDefault()}function dropBack(e){e.preventDefault();if(active==='FIFA 2026'){officialUserWarning();applyActualResults();renderBracket();return}let d=safeData(e);if(!d||e.currentTarget.dataset.team!==d.team)return;let picks=state.users[active].picks;if(d.from&&nodes[d.from]&&nodes[d.from].type==='slot'){delete picks[d.from]}else{Object.keys(picks).forEach(k=>{if(picks[k]===d.team)delete picks[k]})}cleanInvalid(picks);save();renderBracket()}
+function markPath(user){document.querySelectorAll('.connector').forEach(c=>c.classList.remove('path'));document.querySelectorAll('.team,.drop-slot').forEach(c=>c.classList.remove('selected'));let u=state.users[user];if(!u)return;document.documentElement.style.setProperty('--user-color',u.color);Object.entries(u.picks).forEach(([slot,team])=>{let el=document.getElementById(slot);if(el)el.classList.add('selected');let node=nodes[slot];(node.kids||[]).forEach(k=>{let ok=slot==='THIRD'?thirdCandidate(team,k,u.picks):sourceTeam(k,u.picks)===team;if(ok)document.querySelectorAll(`.connector[data-to="${slot}"][data-from="${k}"]`).forEach(c=>c.classList.add('path'))});let tEl=document.getElementById(`team-${team}`);if(tEl)tEl.classList.add('selected')})}
+function colorName(hex){const map={'#32d583':'Green','#00e5ff':'Cyan','#58a6ff':'Blue','#f79009':'Orange','#f97066':'Coral','#b692f6':'Purple','#06aed4':'Teal','#fdb022':'Yellow','#12b76a':'Emerald','#ee46bc':'Pink','#84caff':'Sky Blue','#a6ef67':'Lime'};return map[(hex||'').toLowerCase()]||hex}
+function statusText(name){let u=state.users[name],p=u.picks,count=Object.keys(p).length,champ=p.CHAMPION?`${p.CHAMPION}`:'&lt;Not Decided&gt;';let suffix=name==='FIFA 2026'?` Official results refreshed ${LAST_OFFICIAL_REFRESH||'now'}: ${officialSummaryText()} advanced from completed Round of 32 matches.`:'';return`<span class="status-dot"></span><b>${name}</b> — ${count}/${TOTAL_SLOTS} results filled. Champion: <b>${champ}</b>. Winning path is highlighted in <b>${colorName(u.color)}</b> color.${suffix}`}function renderStatus(){document.getElementById('statusCard').innerHTML=statusText(active)}
+function scoreUser(name){let actual=state.users['FIFA 2026']?.picks||{},picks=state.users[name]?.picks||{},keys=Object.keys(nodes).filter(k=>nodes[k].type==='slot'),actualKeys=keys.filter(k=>actual[k]);if(name==='FIFA 2026')return actualKeys.length?10:0;if(!actualKeys.length)return 0;let matches=actualKeys.filter(k=>picks[k]===actual[k]).length;return Math.round(matches/actualKeys.length*100)/10}function scoreColor(score){let r=Math.round(255*(1-score/10)),g=Math.round(190*(score/10)+45);return`rgb(${r},${g},70)`}
+function renderUsers(){let tbody=document.getElementById('userRows');tbody.innerHTML='';Object.entries(state.users).forEach(([name,u])=>{let champ=u.picks.CHAMPION||'—',completed=Object.keys(u.picks).length,score=scoreUser(name),tr=document.createElement('tr');tr.className='matrix-row';tr.style.background=`linear-gradient(90deg, ${scoreColor(score)}55, transparent)`;tr.innerHTML=`<td><b>${name}</b></td><td><span class="swatch" style="background:${u.color}"></span> <span class="mono">${u.color}</span></td><td>${champ==='—'?'—':champ+' - '+teamMap[champ].name}</td><td>${completed}/${TOTAL_SLOTS}</td><td><b>${score}</b> / 10</td><td class="small">Click row to replay</td>`;tr.onclick=()=>playReplay(name);tbody.appendChild(tr)})}
+function renderUserControls(){let sel=document.getElementById('activeUserSelect');sel.innerHTML=Object.keys(state.users).map(n=>`<option value="${n}">${n}</option>`).join('');sel.value=active;document.getElementById('activeColor').style.background=state.users[active].color}
+document.getElementById('activeUserSelect').onchange=async e=>{active=e.target.value;if(active==='FIFA 2026'){await cloudRefreshOfficialResults()}else{save();renderBracket()}};
+document.getElementById('createUser').onclick=()=>{let name=document.getElementById('newUserName').value.trim();if(!name)return;if(!state.users[name])state.users[name]={color:colorFor(),picks:{}};active=name;document.getElementById('newUserName').value='';save();renderBracket()};
+document.getElementById('resetActive').onclick=()=>{if(active==='FIFA 2026'){officialUserWarning();applyActualResults();save();renderBracket();return}state.users[active].picks={};save();renderBracket()};
+function playReplay(name){let u=state.users[name];if(!u)return;let entries=Object.entries(u.picks),modal=document.getElementById('replayModal'),stage=document.getElementById('stage'),bar=document.querySelector('.bar');document.getElementById('replayTitle').textContent=`${name} prediction path`;modal.classList.add('show');stage.innerHTML='';bar.style.width='0%';document.documentElement.style.setProperty('--user-color',u.color);if(!entries.length){stage.innerHTML='<div class="small">No selections recorded for this user.</div>';return}let i=0;const step=()=>{let[slot,team]=entries[i],card=document.createElement('div');card.className='stage-card';card.innerHTML=`<b style="font-size:30px">${team}</b><span class="small">${teamMap[team].name} — ${nodes[slot].round}</span>`;stage.innerHTML='';stage.appendChild(card);bar.style.width=(((i+1)/entries.length)*100)+'%';i++;if(i<entries.length)setTimeout(step,850)};step()}document.getElementById('closeReplay').onclick=()=>document.getElementById('replayModal').classList.remove('show');
+
+function scaleBracket(){let wrap=document.querySelector('.bracket-wrap');let br=document.getElementById('bracket');if(!wrap||!br)return;let available=Math.max(320,Math.min(window.innerWidth-32,1480));let scale=Math.min(1,available/1480);wrap.style.transform='scale('+scale+')';wrap.style.transformOrigin='top left';wrap.style.width='1480px';wrap.style.height=(900*scale)+'px'}
+window.addEventListener('resize',scaleBracket);
+
+if(safeGet('hideWelcomeBanner')==='true'){
+  const welcome=document.getElementById('welcomeBanner');
+  if(welcome){welcome.style.display='none';}
+}
+const closeWelcome=document.getElementById('closeWelcome');
+if(closeWelcome){
+  closeWelcome.onclick=()=>{
+    const welcome=document.getElementById('welcomeBanner');
+    if(welcome){welcome.style.display='none';}
+    safeSet('hideWelcomeBanner','true');
+  };
+}
+renderUserControls();renderBracket();renderUsers();renderStatus();scaleBracket();save();
+
+// -------------------- V22.2 Serverless AWS Cloud Sync + Official Refresh --------------------
+// Replace after API Gateway deployment, for example:
+// window.FIFA_API_BASE = 'https://abc123.execute-api.us-east-1.amazonaws.com';
+window.FIFA_API_BASE = (window.FIFA_API_BASE || 'https://adsmmknot4.execute-api.us-east-1.amazonaws.com').replace(/\/$/,'');
+function apiEnabled(){return window.FIFA_API_BASE && !window.FIFA_API_BASE.includes('REPLACE_WITH');}
+function setSyncStatus(msg){const el=document.getElementById('cloudSyncStatus'); if(el) el.textContent=msg;}
+async function apiFetch(path, options={}){
+  if(!apiEnabled()) throw new Error('API_BASE_URL_NOT_CONFIGURED');
+  const res = await fetch(window.FIFA_API_BASE + path, {
+    headers:{'Content-Type':'application/json', ...(options.headers||{})},
+    ...options
+  });
+  if(!res.ok){throw new Error(await res.text());}
+  return await res.json();
+}
+async function cloudSaveUser(userName){
+  if(!apiEnabled() || !state || !state.users || !state.users[userName] || userName==='FIFA 2026') return;
+  const u=state.users[userName];
+  await apiFetch('/users',{method:'POST',body:JSON.stringify({userId:userName,displayName:userName,color:u.color})});
+}
+async function cloudSavePrediction(userName){
+  if(!apiEnabled() || !state || !state.users || !state.users[userName] || userName==='FIFA 2026') return;
+  const u=state.users[userName];
+  await cloudSaveUser(userName);
+  await apiFetch('/predictions/'+encodeURIComponent(userName),{method:'POST',body:JSON.stringify({userId:userName,displayName:userName,color:u.color,selections:u.picks||{}})});
+  setSyncStatus('synced to AWS');
+}
+async function cloudLoadAll(){
+  if(!apiEnabled()){setSyncStatus('local mode until API_BASE_URL is configured');return;}
+  try{
+    const data=await apiFetch('/state');
+    if(data && data.users){
+      Object.entries(data.users).forEach(([name,u])=>{
+        if(!state.users[name])state.users[name]={color:u.color||colorFor(),picks:{}};
+        state.users[name].color=u.color||state.users[name].color;
+        state.users[name].picks=u.selections||u.picks||{};
+      });
+      if(data.officialResults){
+        ACTUAL_RESULTS=data.officialResults.selections||{};
+        LAST_OFFICIAL_REFRESH=data.officialResults.refreshedAt||new Date().toLocaleString();
+        if(state.users['FIFA 2026'])state.users['FIFA 2026'].picks=ACTUAL_RESULTS;
+      }
+      renderUserControls();renderBracket();renderUsers();renderStatus();scaleBracket();
+      setSyncStatus('loaded from AWS');
+    }
+  }catch(e){console.warn('Cloud load failed',e);setSyncStatus('AWS sync unavailable; using embedded/local mode');}
+}
+async function cloudRefreshOfficialResults(){
+  if(!apiEnabled()){
+    refreshOfficialResults(true);
+    setSyncStatus('official results refreshed locally from embedded timeline');
+    return;
+  }
+  try{
+    const official=await apiFetch('/official-results/refresh',{method:'POST'});
+    ACTUAL_RESULTS=official.selections||{};
+    LAST_OFFICIAL_REFRESH=official.refreshedAt||new Date().toLocaleString();
+    if(state.users['FIFA 2026'])state.users['FIFA 2026'].picks=ACTUAL_RESULTS;
+    await cloudLoadAll();
+    setSyncStatus('official FIFA 2026 results refreshed from AWS');
+  }catch(e){console.warn('Official refresh failed',e);refreshOfficialResults(true);setSyncStatus('official refresh used embedded/local fallback');}
+}
+</script>
+</body>
+</html>
