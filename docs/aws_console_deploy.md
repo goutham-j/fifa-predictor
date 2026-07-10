@@ -124,4 +124,7 @@ https://<abcd1234>.execute-api.us-east-1.amazonaws.com/official-results/refresh
 
 ## 7. Validate app
 1. Open your S3 website endpoint (http://fifa-predictor.s3-website-us-east-1.amazonaws.com/)
-2. Select FIFA 2026, and verify flags and updated official progression display correctly.
+2. Select "FIFA 2026" user, and verify if the match results are showing correctly.
+3. Select "Default User" and try to predict matches, try "Clear Selections"
+4. Create a new user and try to predict matches, try "Clear Selections"
+5. In the "Prediction Matrix" at the bottom, all users should be listed with their details & a score.
