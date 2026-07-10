@@ -85,24 +85,30 @@ Resource = *
 
 Create HTTP API end points
 1. Open API Gateway->Choose: HTTP API->Click Build
-2. Add Lambda Integration. Select: fifa-predictor-api, Click: Next
-3. Configure Routes
+2. API Name: fifa-predictor-api, Click: Next
+3. Configure: Routes
    
 ```text
 Add: ANY /
 Add: ANY /{proxy+}
 ```
 
-4. Enable CORS: In: API Gateway→ CORS
-Configure:
-
+4. Configure: Integrations
 ```text
-Allowed Origins:*
-Allowed Methods:GETPOSTPUTOPTIONS
-Allowed Headers:*
+Select {proxy+}->Any. Create and Attach an Integration
+Integration Target: Lambda function
+Integration Details: Select AWS Region & Select Lambda Function
 ```
 
-5. Save the API endpoint: https://<abcd1234>.execute-api.us-east-1.amazonaws.com
+5. Configure: CORS
+Add the following under each sub-sections,
+```text
+Allow Origins: *
+Allow Methods: GET, POST, PUT, OPTIONS
+Allow Headers: *
+```
+
+6. Remember the API Default endpoint: https://<abcd1234>.execute-api.us-east-1.amazonaws.com
 
 ## 5. Configure frontend
 
