@@ -9,10 +9,10 @@ User Browser
 S3 Static Website Hosting  (https://fifa-predictor.s3.us-east-1.amazonaws.com/index.html)
    |
    v
-API Gateway HTTP API 
+API Gateway HTTP API (fifa-predictor-http-api)
    |
    v
-Lambda: lambda_function.handler
+Lambda: lambda_function.handler (lambda_function.py)
    |
    v
 DynamoDB: fifa-predictor-table
