@@ -1,15 +1,15 @@
 # Architecture - FIFA Predictor
 
-## Current architecture
+## AWS Architecture
 
 ```text
 User Browser
    |
    v
-S3 Static Website Hosting
+S3 Static Website Hosting  (https://fifa-predictor.s3.us-east-1.amazonaws.com/index.html)
    |
    v
-API Gateway HTTP API
+API Gateway HTTP API 
    |
    v
 Lambda: lambda_function.handler
@@ -28,7 +28,19 @@ No Kubernetes.
 CloudFront provides HTTPS automatically.
 
 And you'll access the application through S3 public endpoint. CloudFront can be added later.
-[(http://fifa-predictor.s3-website-us-east-1.amazonaws.com/)]
+http://fifa-predictor.s3-website-us-east-1.amazonaws.com/
+```
+
+## Functional Flow
+
+```text
+1. index.html -> Calls https://adsmmknot4.execute-api.us-east-1.amazonaws.com/? different endpoints for the following functions,
+   - To refresh the official results
+   - To create new users
+   - To provide status of all users
+
+2. 
+
 ```
 
 ## FIFA 2026 User Flow
