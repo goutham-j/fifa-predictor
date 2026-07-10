@@ -19,16 +19,16 @@ AWS Console
 
 ## 1. Upload frontend
 
-Stores UI & Error web pages
+Creates UI & Error web pages
 1. Open S3.
-2. Open your `fifa-predictor` bucket.
+2. Create `fifa-predictor` bucket.
 3. Upload `frontend/index.html` as `index.html`.
 4. Upload `frontend/error.html` as `error.html`.
 5. Uncheck: Block All Public Access
 
 ## 2. Configure Dynamo DB
 
-Stores: Users, Picks & FIFA 2026 Official Results
+Stores Users, Picks & FIFA 2026 Official Results
 1. Open Dynamo DB-> Create Table
 2. Give Table Name:fifa-predictor-table, Partition Key:pk (String), Sort Key:sk (String)
 3. Choose: On-Demand Capacity
