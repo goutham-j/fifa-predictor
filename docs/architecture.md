@@ -26,9 +26,12 @@ No custom domain.
 No SSL certificates to manage.
 No Kubernetes.
 CloudFront provides HTTPS automatically.
+
+And you'll access the application through S3 public endpoint. CloudFront can be added later.
+[(http://fifa-predictor.s3-website-us-east-1.amazonaws.com/)]
 ```
 
-## FIFA 2026 refresh flow
+## FIFA 2026 User Flow
 
 ```text
 User selects FIFA 2026
@@ -37,14 +40,4 @@ User selects FIFA 2026
    -> Lambda writes USER#FIFA 2026 / PREDICTION#FIFA2026 to DynamoDB
    -> frontend calls GET /state
    -> bracket, Prediction Matrix, and scores refresh
-```
-
-
-
-
-DynamoDB remains:
-
-```text
-pk = USER#<UserId>
-sk = PROFILE | PREDICTION#FIFA2026
 ```
