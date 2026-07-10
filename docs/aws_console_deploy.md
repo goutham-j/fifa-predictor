@@ -1,4 +1,4 @@
-# AWS Console Deployment - V23 Option A
+# AWS Console Deployment
 
 ## 1. Upload frontend
 
