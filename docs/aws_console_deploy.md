@@ -29,18 +29,19 @@ Creates UI & Error web pages
 ## 2. Configure Dynamo DB
 
 Stores Users, Picks & FIFA 2026 Official Results
-1. Open Dynamo DB-> Create Table
-2. Give Table Name:fifa-predictor-table, Partition Key:pk (String), Sort Key:sk (String)
-3. Choose: On-Demand Capacity
+1. Open Dynamo DB
+2. Create Table
+3. Give Table Name: fifa-predictor-table, Partition Key: pk (String), Sort Key: sk (String)
+4. Choose: On-Demand Capacity
    
 ## 3. Update Lambda
 
 Lambda code handles API response(s): /state, /users, /predictions, /leaderboard, /official-results, /refresh and writes official FIFA 2026 results into DynamoDB.
 1. Open Lambda.
-2. Open your `fifa-predictor-api` function.
+2. Create `fifa-predictor-api` function.
 3. Select: Author from Scratch, Runtime: Python 3.12
-4. Copy the code with `backend/lambda/lambda_function.py`.
-5. Confirm handler is:
+4. Copy the code from `backend/lambda/lambda_function.py` into the code editor.
+5. Confirm handler name as:
    
 ```text
 lambda_function.handler
