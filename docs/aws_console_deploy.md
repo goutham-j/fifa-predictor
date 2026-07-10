@@ -85,7 +85,7 @@ Resource = *
 
 Create HTTP API end points
 1. Open API Gateway->Choose: HTTP API->Click Build
-2. API Name: fifa-predictor-api, Click: Next
+2. API Name: fifa-predictor-http-api, Click: Next
 3. Configure: Routes
    
 ```text
