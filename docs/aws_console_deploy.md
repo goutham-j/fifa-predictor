@@ -24,7 +24,7 @@ Creates UI & Error web pages
 2. Create `fifa-predictor` bucket.
 3. Upload `frontend/index.html` as `index.html`.
 4. Upload `frontend/error.html` as `error.html`.
-5. Uncheck: Block All Public Access
+5. Uncheck: Block All Public Access, Enable: Bucket Versioning
 
 ## 2. Configure Dynamo DB
 
