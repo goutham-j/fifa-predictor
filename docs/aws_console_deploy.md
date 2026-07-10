@@ -45,7 +45,6 @@ Lambda code handles API response(s): /state, /users, /predictions, /leaderboard,
    
 ```text
 lambda_function.handler
-
 ```
 
 6. Confirm environment variables:
@@ -57,12 +56,11 @@ CORS_ORIGIN=*
 ```
 
 7. Grant DynamoDB Access
-   
-```text
-Navigate: Configuration->Permissions
 
-Click Lambda Role.
-Add inline policy:
+Navigate: Configuration->Permissions
+Click Lambda Role. Add inline policy:
+
+```text
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -78,9 +76,8 @@ Add inline policy:
     }
   ]
 }
-
-Resource = *
 ```
+Resource = *
 
 8. Click Deploy.
 
@@ -88,7 +85,7 @@ Resource = *
 
 Create HTTP API end points
 1. Open API Gateway->Choose: HTTP API->Click Build
-2. Add Lambda Integration. Select: fifa-predictor-api, Click:Next
+2. Add Lambda Integration. Select: fifa-predictor-api, Click: Next
 3. Configure Routes
    
 ```text
