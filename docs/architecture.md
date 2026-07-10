@@ -1,4 +1,4 @@
-# Architecture - FIFA Predictor V23 Option A
+# Architecture - FIFA Predictor
 
 ## Current architecture
 
@@ -16,6 +16,16 @@ Lambda: lambda_function.handler
    |
    v
 DynamoDB: fifa-predictor-table
+
+This is 100% serverless.
+No Route53.
+No EC2.
+No servers.
+No load balancers.
+No custom domain.
+No SSL certificates to manage.
+No Kubernetes.
+CloudFront provides HTTPS automatically.
 ```
 
 ## FIFA 2026 refresh flow
@@ -29,11 +39,8 @@ User selects FIFA 2026
    -> bracket, Prediction Matrix, and scores refresh
 ```
 
-## Why Option A
 
-The live FIFA website parsing enhancement is deferred. This version keeps the backend stable by using a manually updated official timeline.
 
-## No AWS schema change
 
 DynamoDB remains:
 
