@@ -43,9 +43,12 @@ Lambda code handles API response(s): /state, /users, /predictions, /leaderboard,
 4. Create Function
 5. Select `fifaPredictorLambda` function & goto "Code" and copy the code from `backend/lambda_function.py`.
 6. Setup Runtime Handler
+
 Navigate: Below the code editor, "Runtime settings", Edit, under "Handler" add the actual lambda handler name as <file_name>.<handler_name>
    e.g: lambda_function.handler  or my_file.lambda_handler
-8. Configure Environment Variables
+
+7. Configure Environment Variables
+
 Navigate: Configuration->Environment Settings. Add the below environment variables as key-value pairs.
 
 ```text
@@ -79,7 +82,7 @@ On the policy editor, select "JSON" and copy the below policy.
 ```
 Click on Next, ener a policy name like "DynamoDBInlinePolicy"
 
-8. Deploy Code
+9. Deploy Code
 Go back to Lambda->Select the lambda function->Code
 Click Deploy.
 
