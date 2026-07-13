@@ -40,7 +40,7 @@ Lambda code handles API response(s): /state, /users, /predictions, /leaderboard,
 1. Open Lambda.
 2. Create `fifa-predictor-api` function.
 3. Select: Author from Scratch, Runtime: Python 3.12
-4. Copy the code from `backend/lambda/lambda_function.py` into the code editor.
+4. Copy the code from `backend/lambda_function.py` into the code editor.
 5. Confirm handler name as:
    
 ```text
