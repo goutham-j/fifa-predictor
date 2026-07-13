@@ -41,10 +41,10 @@ Lambda code handles API response(s): /state, /users, /predictions, /leaderboard,
 2. Create `fifaPredictorLambda` function.
 3. Select: Author from Scratch, Runtime: Python 3.14 or latest
 4. Create Function
-5. Select `fifaPredictorLambda` function & goto "Code" and copy the code from `backend/lambda_function.py`.
+5. Select `fifaPredictorLambda` function, goto "Code" and copy the code from `backend/lambda_function.py`.
 6. Setup Runtime Handler
 
-Navigate: Below the code editor, "Runtime settings", Edit, under "Handler" add the actual lambda handler name as <file_name>.<handler_name>
+Navigate: Under the code editor, "Runtime settings", Edit, under "Handler" add the actual lambda handler name as <file_name>.<handler_name>
    e.g: lambda_function.handler  or my_file.lambda_handler
 
 7. Configure Environment Variables
@@ -56,6 +56,7 @@ TABLE_NAME=fifa-predictor-table
 TOURNAMENT=FIFA2026
 CORS_ORIGIN=*
 ```
+
 8. Grant DynamoDB Access
 
 Navigate: Configuration->Permissions
@@ -80,7 +81,7 @@ On the policy editor, select "JSON" and copy the below policy.
 	]
 }
 ```
-Click on Next, ener a policy name like "DynamoDBInlinePolicy"
+Click on Next, enter a policy name like "DynamoDBInlinePolicy"
 
 9. Deploy Code
 Go back to Lambda->Select the lambda function->Code
