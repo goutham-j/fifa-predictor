@@ -20,5 +20,4 @@ A browser-based FIFA 2026 World Cup knockout predictor with AWS-backed user pers
 
 ## Runtime architecture
 
-S3 Website -> API Gateway -> Lambda -> DynamoDB.
-(CloudFront is optional and can be added later).
+Users (Browser) -> S3 Website -> API Gateway -> Lambda -> DynamoDB.
