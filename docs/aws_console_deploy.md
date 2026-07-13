@@ -123,7 +123,15 @@ Allow Headers: *
 
 1. Update S3:index.html
 2. Search for: REPLACE_WITH_API_GATEWAY_URL
-3. Replace with: https://<abcd1234>.execute-api.us-east-1.amazonaws.com .
+3. Replace with: https://<abcd1234>.execute-api.us-east-1.amazonaws.com
+
+## 6. Configure CDN
+
+1. Open Cloudfront
+2. Create Distributions->Choose a plan (Select the free plan)
+3. Give a name "fifa-predictor-cf", Select a "Single website or app"
+4. Specify Origin. Select Amazon S3 & the S3 origin bucket (fifa-predictor)
+   fifa-predictor.s3.us-east-1.amazonaws.com
 
 ## 6. Validate backend
 
