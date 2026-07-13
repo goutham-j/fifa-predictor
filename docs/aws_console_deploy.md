@@ -84,8 +84,9 @@ On the policy editor, select "JSON" and copy the below policy.
 Click on Next, enter a policy name like "DynamoDBInlinePolicy"
 
 9. Deploy Code
-Go back to Lambda->Select the lambda function->Code
-Click Deploy.
+
+Open Lambda->Select the lambda function->Code
+Click "Deploy".
 
 ## 4. Create API Gateway
 
@@ -100,6 +101,7 @@ Add: ANY /{proxy+}
 ```
 
 4. Configure: Integrations
+   
 ```text
 Select {proxy+}->Any. Create and Attach an Integration
 Integration Target: Lambda function
@@ -107,6 +109,7 @@ Integration Details: Select AWS Region & Select Lambda Function
 ```
 
 5. Configure: CORS
+   
 Add the following under each sub-sections,
 ```text
 Allow Origins: *
@@ -119,8 +122,8 @@ Allow Headers: *
 ## 5. Configure frontend
 
 1. Update S3:index.html
-Search for: REPLACE_WITH_API_GATEWAY_URL
-Replace with: https://<abcd1234>.execute-api.us-east-1.amazonaws.com .
+2. Search for: REPLACE_WITH_API_GATEWAY_URL
+3. Replace with: https://<abcd1234>.execute-api.us-east-1.amazonaws.com .
 
 ## 6. Validate backend
 
