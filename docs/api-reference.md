@@ -26,11 +26,11 @@ Manual override endpoint for official results.
 
 ## API Examples
 
-'''text
+```text
 https://{abc123}.execute-api.us-east-1.amazonaws.com
 https://{abc123}.execute-api.us-east-1.amazonaws.com/health
 https://{abc123}.execute-api.us-east-1.amazonaws.com/state
 https://{abc123}.execute-api.us-east-1.amazonaws.com/leaderboard
 https://{abc123}.execute-api.us-east-1.amazonaws.com/users
 https://{abc123}.execute-api.us-east-1.amazonaws.com/official-results/refresh
-'''
+```
