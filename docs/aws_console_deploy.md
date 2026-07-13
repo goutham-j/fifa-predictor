@@ -117,13 +117,13 @@ Allow Methods: GET, POST, PUT, OPTIONS
 Allow Headers: *
 ```
 
-6. Remember the API Default endpoint: https://<abcd1234>.execute-api.us-east-1.amazonaws.com
+6. Remember the API Default endpoint: [https://abcd1234.execute-api.us-east-1.amazonaws.com](https://adsmmknot4.execute-api.us-east-1.amazonaws.com)
 
 ## 5. Update Frontend to use API
 
 1. Open S3: index.html
 2. Search for: REPLACE_WITH_API_GATEWAY_URL
-3. Replace with: https://<abcd1234>.execute-api.us-east-1.amazonaws.com
+3. Replace with: [https://abcd1234.execute-api.us-east-1.amazonaws.com](https://adsmmknot4.execute-api.us-east-1.amazonaws.com)
 
 ## 6. Configure Cloudfront
 
@@ -174,7 +174,7 @@ Note: 950755621885 is <account id> and E10S89UVXWNEFA is <distribution name>
 Test the following links: (*Replace abcd1234 with the AWS resource name)
 
 ```text
-https://<abcd1234>.execute-api.us-east-1.amazonaws.com/health
+[https://<abcd1234.execute-api.us-east-1.amazonaws.com/](https://adsmmknot4.execute-api.us-east-1.amazonaws.com)health
 https://<abcd1234>.execute-api.us-east-1.amazonaws.com/state
 https://<abcd1234>.execute-api.us-east-1.amazonaws.com/leaderboard
 https://<abcd1234>.execute-api.us-east-1.amazonaws.com/users
