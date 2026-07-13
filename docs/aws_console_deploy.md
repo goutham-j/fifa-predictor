@@ -17,16 +17,16 @@ AWS Console
 1. Login to AWS Console
 2. Choose Region: US East (N. Virginia) - us-east-1
 
-## 1. Upload frontend
+## 1. Create S3 & Upload Frontend Files
 
 Creates UI & Error web pages
 1. Open S3.
 2. Create `fifa-predictor` bucket.
 3. Upload `frontend/index.html` as `index.html`.
 4. Upload `frontend/error.html` as `error.html`.
-5. Uncheck: Block All Public Access, Enable: Bucket Versioning
+5. Uncheck: Block All Public Access & Enable: Bucket Versioning
 
-## 2. Configure Dynamo DB
+## 2. Setup Dynamo DB
 
 Stores Users, Picks & FIFA 2026 Official Results
 1. Open Dynamo DB
@@ -34,7 +34,7 @@ Stores Users, Picks & FIFA 2026 Official Results
 3. Give Table Name: fifa-predictor-table, Partition Key: pk (String), Sort Key: sk (String)
 4. Choose: On-Demand Capacity
    
-## 3. Update Lambda
+## 3. Configure Lambda
 
 Lambda code handles API response(s): /state, /users, /predictions, /leaderboard, /official-results, /refresh and writes official FIFA 2026 results into DynamoDB.
 1. Open Lambda.
@@ -119,9 +119,9 @@ Allow Headers: *
 
 6. Remember the API Default endpoint: https://<abcd1234>.execute-api.us-east-1.amazonaws.com
 
-## 5. Configure frontend
+## 5. Update Frontend to use API
 
-1. Update S3:index.html
+1. Open S3: index.html
 2. Search for: REPLACE_WITH_API_GATEWAY_URL
 3. Replace with: https://<abcd1234>.execute-api.us-east-1.amazonaws.com
 
@@ -132,10 +132,44 @@ Allow Headers: *
 3. Give a name "fifa-predictor-cf", Select a "Single website or app"
 4. Specify Origin. Select Amazon S3 & the S3 origin bucket (fifa-predictor)
 5. Create Distribution
-6. 
-   fifa-predictor.s3.us-east-1.amazonaws.com
+6. Open the Distribution
+7. Goto "General"->Edit
+   Default root object, Enter "index.html"
+8. Goto "Origins"
+   Create Origin. Choosing Origin Domian as S3 and select "fifa-predictor"
+   Under "Origin Access", select "Origin access control settings (recommended)"
+   Will create a OAC like - "fifa-predictor.s3.us-east-1.amazonaws.com"
+10. Save Changes
+11. Remember the CloudFront Distribution domain name, "d3kucjh82irtfi.cloudfront.net"
 
-## 6. Validate backend
+## 7. Update S3 Permission
+1. Open S3: fifa-predictor bucket
+2. Allow Cloudfront to access S3. Update "Permissions"
+
+```text
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowCloudFrontServicePrincipal",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudfront.amazonaws.com"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::fifa-predictor/*",
+            "Condition": {
+                "StringEquals": {
+                    "AWS:SourceArn": "arn:aws:cloudfront::950755621885:distribution/E10S89UVXWNEFA"
+                }
+            }
+        }
+    ]
+}
+```
+Note: 950755621885 is <account id> and E10S89UVXWNEFA is <distribution name>
+
+## 8. Validate backend
 
 Test the following links: (*Replace abcd1234 with the AWS resource name)
 
@@ -147,7 +181,7 @@ https://<abcd1234>.execute-api.us-east-1.amazonaws.com/users
 https://<abcd1234>.execute-api.us-east-1.amazonaws.com/official-results/refresh
 ```
 
-## 7. Validate app
+## 8. Validate app
 1. Open your S3 website endpoint (http://fifa-predictor.s3-website-us-east-1.amazonaws.com/)
 2. Select "FIFA 2026" user, and verify if the match results are showing correctly.
 3. Select "Default User" and try to predict matches, try "Clear Selections"
