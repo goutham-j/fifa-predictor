@@ -38,48 +38,50 @@ Stores Users, Picks & FIFA 2026 Official Results
 
 Lambda code handles API response(s): /state, /users, /predictions, /leaderboard, /official-results, /refresh and writes official FIFA 2026 results into DynamoDB.
 1. Open Lambda.
-2. Create `fifa-predictor-api` function.
-3. Select: Author from Scratch, Runtime: Python 3.12
-4. Copy the code from `backend/lambda_function.py` into the code editor.
-5. Confirm handler name as:
-   
-```text
-lambda_function.handler
-```
+2. Create `fifaPredictorLambda` function.
+3. Select: Author from Scratch, Runtime: Python 3.14 or latest
+4. Create Function
+5. Select `fifaPredictorLambda` function & goto "Code" and copy the code from `backend/lambda_function.py`.
+6. Setup Runtime Handler
+Navigate: Below the code editor, "Runtime settings", Edit, under "Handler" add the actual lambda handler name as <file_name>.<handler_name>
+   e.g: lambda_function.handler  or my_file.lambda_handler
+8. Configure Environment Variables
+Navigate: Configuration->Environment Settings. Add the below environment variables as key-value pairs.
 
-6. Confirm environment variables:
-   
 ```text
 TABLE_NAME=fifa-predictor-table
 TOURNAMENT=FIFA2026
 CORS_ORIGIN=*
 ```
-
-7. Grant DynamoDB Access
+8. Grant DynamoDB Access
 
 Navigate: Configuration->Permissions
-Click Lambda Role. Add inline policy:
+Select the available lambda Role (e.g fifaPredictorAPI-role-ad55k0km). 
+Under "Permissions", "Add Permissions"->Create Inline Policy
+On the policy editor, select "JSON" and copy the below policy.
 
 ```text
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "dynamodb:GetItem",
-        "dynamodb:PutItem",
-        "dynamodb:Scan",
-        "dynamodb:Query"
-      ],
-      "Resource": "*"
-    }
-  ]
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"dynamodb:GetItem",
+				"dynamodb:PutItem",
+				"dynamodb:Scan",
+				"dynamodb:Query"
+			],
+			"Resource": "*"
+		}
+	]
 }
 ```
-Resource = *
+Click on Next, ener a policy name like "DynamoDBInlinePolicy"
 
-8. Click Deploy.
+8. Deploy Code
+Go back to Lambda->Select the lambda function->Code
+Click Deploy.
 
 ## 4. Create API Gateway
 
