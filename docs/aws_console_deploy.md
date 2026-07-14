@@ -138,7 +138,7 @@ Allow Headers: *
    Under "Origin Access", select "Origin access control settings (recommended)"
    Will create a OAC like - "fifa-predictor.s3.us-east-1.amazonaws.com"
 10. Save Changes
-11. Remember the CloudFront Distribution domain name, "d3kucjh82irtfi.cloudfront.net"
+11. Remember the CloudFront end point ("d3kucjh82irtfi.cloudfront.net")
 
 ## 7. Update S3 Permission
 1. Open S3: fifa-predictor bucket
@@ -180,10 +180,10 @@ https://adsmmknot4.execute-api.us-east-1.amazonaws.com/official-results/refresh
 ```
 
 ## 8. Validate app
-1. Open your S3 website endpoint (http://fifa-predictor.s3-website-us-east-1.amazonaws.com/)
+1. Open https://d3kucjh82irtfi.cloudfront.net in a browser (replace d3kucjh82irtfi with your CDN end point)
 2. Select "FIFA 2026" user, and verify if the match results are showing correctly.
 3. Select "Default User" and try to predict matches, try "Clear Selections"
 4. Create a new user and try to predict matches, try "Clear Selections"
 5. In the "Prediction Matrix" at the bottom, all users should be listed with their details & a score.
 
-https://d3kucjh82irtfi.cloudfront.net/
+
