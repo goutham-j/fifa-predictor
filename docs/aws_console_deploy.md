@@ -5,25 +5,19 @@
 ```text
 AWS Console
 │
-├── S3
-├── DynamoDB
-├── Lambda
-├── API Gateway
+├── Setup DynamoDB
+├── Configure Lambda
+├── Configure API Gateway
+├── Create S3
+├── Setup Cloud Front
+├── Testing & Validation
 ```
 
 
-## 0. AWS config
+## 1. AWS config
 
 1. Login to AWS Console
 2. Choose Region: US East (N. Virginia) - us-east-1
-
-## 1. Create S3 & Upload Frontend Files
-
-Creates UI & Error web pages
-1. Open S3.
-2. Create `fifa-predictor` bucket.
-3. Upload `frontend/index.html` as `index.html`.
-4. Upload `frontend/error.html` as `error.html`.
 
 ## 2. Setup Dynamo DB
 
@@ -117,11 +111,14 @@ Allow Headers: *
 ```
 6. Remember the API Default endpoint: https://adsmmknot4.execute-api.us-east-1.amazonaws.com
 
-## 5. Update Frontend to use API
+## 5. Create S3
 
-1. Open S3: index.html
-2. Search for: REPLACE_WITH_API_GATEWAY_URL
-3. Replace with: https://adsmmknot4.execute-api.us-east-1.amazonaws.com
+Create UI & Error web pages
+1. Open S3.
+2. Create `fifa-predictor` bucket.
+3. Upload `frontend/index.html` as `index.html`.
+4. Upload `frontend/error.html` as `error.html`.
+2. In index.html, REPLACE_WITH_API_GATEWAY_URL & replace with: https://adsmmknot4.execute-api.us-east-1.amazonaws.com
 
 ## 6. Configure Cloudfront
 
