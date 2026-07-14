@@ -116,13 +116,13 @@ Allow Origins: *
 Allow Methods: GET, POST, PUT, OPTIONS
 Allow Headers: *
 ```
-6. Remember the API Default endpoint: [https://adsmmknot4.execute-api.us-east-1.amazonaws.com]
+6. Remember the API Default endpoint: https://adsmmknot4.execute-api.us-east-1.amazonaws.com
 
 ## 5. Update Frontend to use API
 
 1. Open S3: index.html
 2. Search for: REPLACE_WITH_API_GATEWAY_URL
-3. Replace with: [https://adsmmknot4.execute-api.us-east-1.amazonaws.com]
+3. Replace with: https://adsmmknot4.execute-api.us-east-1.amazonaws.com
 
 ## 6. Configure Cloudfront
 
