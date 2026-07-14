@@ -165,7 +165,7 @@ Allow Headers: *
     ]
 }
 ```
-Note: 950755621885 is <account id> and E10S89UVXWNEFA is <distribution name>
+Note: 950755621885 is "AWS account id" and E10S89UVXWNEFA is the "CDN distribution name"
 
 ## 8. Validate Backend
 
