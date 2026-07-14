@@ -174,7 +174,7 @@ Note: 950755621885 is <account id> and E10S89UVXWNEFA is <distribution name>
 Test the following links: (*Replace abcd1234 with the AWS resource name)
 
 ```text
-[https://<abcd1234.execute-api.us-east-1.amazonaws.com/](https://adsmmknot4.execute-api.us-east-1.amazonaws.com)health
+[https://adsmmknot4.execute-api.us-east-1.amazonaws.com/health]
 https://<abcd1234>.execute-api.us-east-1.amazonaws.com/state
 https://<abcd1234>.execute-api.us-east-1.amazonaws.com/leaderboard
 https://<abcd1234>.execute-api.us-east-1.amazonaws.com/users
