@@ -9,13 +9,13 @@ User Browser
 Cloudfront (https://d3kucjh82irtfi.cloudfront.net)
    |
    v
-S3 Static Website Hosting  (https://fifa-predictor.s3.us-east-1.amazonaws.com/index.html)
+S3 (fifa-predictor)
    |
    v
 API Gateway HTTP API (fifa-predictor-http-api)
    |
    v
-Lambda: lambda_function.handler (lambda_function.py)
+Lambda: fifaPredictionLambda (lambda_function.handler)
    |
    v
 DynamoDB: fifa-predictor-table
