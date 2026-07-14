@@ -6,6 +6,9 @@
 User Browser
    |
    v
+Cloudfront (https://d3kucjh82irtfi.cloudfront.net)
+   |
+   v
 S3 Static Website Hosting  (https://fifa-predictor.s3.us-east-1.amazonaws.com/index.html)
    |
    v
@@ -27,20 +30,21 @@ No SSL certificates to manage.
 No Kubernetes.
 CloudFront provides HTTPS automatically.
 
-And you'll access the application through S3 public endpoint. CloudFront can be added later.
+Application can be accessed by the CDN endpoint (https://d3kucjh82irtfi.cloudfront.net/)
 http://fifa-predictor.s3-website-us-east-1.amazonaws.com/
 ```
 
 ## Functional Flow
 
 ```text
-1. index.html -> Calls https://adsmmknot4.execute-api.us-east-1.amazonaws.com/? different endpoints for the following functions,
+1. Cloudfront (https://d3kucjh82irtfi.cloudfront.net/) setup redirects request to 'fifa-predictor' S3 with index.html as the root object.
+2. Frontend code is built in index.html
+3. The backend functions defined in index.html calls https://adsmmknot4.execute-api.us-east-1.amazonaws.com/? with different endpoints for the following functions,
    - To refresh the official results
    - To create new users
    - To provide status of all users
-
-2. 
-
+3. The API Gateway executes the lambda function defined in the lambda.handler
+4. The lambda functions writes data to the Dyanamo DB table.
 ```
 
 ## FIFA 2026 User Flow
@@ -48,8 +52,8 @@ http://fifa-predictor.s3-website-us-east-1.amazonaws.com/
 ```text
 User selects FIFA 2026
    -> frontend calls POST /official-results/refresh
-   -> Lambda recomputes official selections from OFFICIAL_RESULTS_TIMELINE
-   -> Lambda writes USER#FIFA 2026 / PREDICTION#FIFA2026 to DynamoDB
+      -> Lambda recomputes official selections from OFFICIAL_RESULTS_TIMELINE
+      -> Lambda writes USER#FIFA 2026 / PREDICTION#FIFA2026 to DynamoDB
    -> frontend calls GET /state
-   -> bracket, Prediction Matrix, and scores refresh
+      -> bracket, Prediction Matrix, and scores refresh
 ```
