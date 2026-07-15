@@ -3,22 +3,21 @@
 ## AWS Architecture
 
 ```text
-User Browser
-   |
-   v
-Cloudfront (https://d3kucjh82irtfi.cloudfront.net)
-   |
-   v
-S3 (fifa-predictor)
-   |
-   v
-API Gateway HTTP API (fifa-predictor-http-api)
-   |
-   v
-Lambda: fifaPredictionLambda (lambda_function.handler)
-   |
-   v
-DynamoDB: fifa-predictor-table
+Users
+   ↓
+https://d3kucjh82irtfi.cloudfront.net
+   ↓
+CloudFront Distribution (E10S89UVXWNEFA)
+   ↓
+Origin Access Control (OAC)
+   ↓
+Private S3 Bucket (fifa-predictor)
+   ↓
+API Gateway (fifa-predictor-http-api)
+   ↓
+Lambda fifaPredictionLambda (lambda_function.handler)
+   ↓
+DynamoDB (fifa-predictor-table)
 
 This is 100% serverless.
 No Route53.
@@ -33,6 +32,7 @@ CloudFront provides HTTPS automatically.
 Application can be accessed by the CDN endpoint (https://d3kucjh82irtfi.cloudfront.net/)
 http://fifa-predictor.s3-website-us-east-1.amazonaws.com/
 ```
+
 
 ## Functional Flow
 
